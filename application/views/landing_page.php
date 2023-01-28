@@ -7,7 +7,7 @@
 		<div class="so-widget-sow-headline">
 			<div class="sow-headline">
 				<!-- <h1 class="whitetext">SELAMAT DATANG</h1> -->
-				<h1 class="whitetext">Vilary Salon & Spa</h1>
+				<h1 class="whitetext">Vilary Salon dan Spa</h1>
 			</div>
 		</div>
 		<br />

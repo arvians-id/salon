@@ -31,7 +31,7 @@ CREATE TABLE `login_admin` (
   `id` int NOT NULL,
   `username` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 --
 -- Dumping data for table `login_admin`
@@ -54,7 +54,7 @@ CREATE TABLE `login_pelanggan` (
   `password` varchar(255) NOT NULL,
   `is_active` int NOT NULL,
   `date_created` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 --
 -- Dumping data for table `login_pelanggan`
@@ -121,7 +121,7 @@ CREATE TABLE `tb_reservasi` (
   `tanggal` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `phone` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 --
 -- Dumping data for table `tb_reservasi`
@@ -204,7 +204,7 @@ CREATE TABLE `user_token` (
   `email` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
   `date_created` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB;
 
 --
 -- Dumping data for table `user_token`
