@@ -35,7 +35,16 @@
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-
+                                                    <?php $no = 1;
+                                                    foreach ($getRiwayat as $riwayat) : ?>
+                                                        <tr>
+                                                            <td class="text-center"><?= $no++ ?></td>
+                                                            <td><?= $riwayat['kode_riwayat'] ?></td>
+                                                            <td><?= $riwayat['nama_pelanggan'] ?></td>
+                                                            <td><?= $riwayat['kode_jenis_perawatan'] ?></td>
+                                                            <td><?= $riwayat['created_at'] ?></td>
+                                                        </tr>
+                                                    <?php endforeach ?>
                                                 </tbody>
                                             </table>
                                         </div>

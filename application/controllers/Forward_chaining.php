@@ -18,8 +18,13 @@ class Forward_Chaining extends CI_Controller
     }
     public function data_riwayat()
     {
+        $data = [
+            'judul' => 'Data Gejala',
+            'getRiwayat' => $this->db->get('tb_riwayat')->result_array(),
+        ];
+
         $this->load->view('admin_header');
-        $this->load->view('forward-chaining/admin_fc_riwayat');
+        $this->load->view('forward-chaining/admin_fc_riwayat', $data);
     }
     // GEJALA
     public function data_gejala()

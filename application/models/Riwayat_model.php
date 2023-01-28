@@ -6,22 +6,20 @@ class Riwayat_model extends CI_Model
 	public function getRiwayatRelation($kode_riwayat)
 	{
 		$this->db->select('*');
-		$this->db->from('tbl_riwayat r');
-		$this->db->join('tbl_pelanggan p', 'r.kode_pelanggan = p.kode_pelanggan');
-		$this->db->join('tbl_modem m', 'm.kode_modem = r.kode_modem');
+		$this->db->from('tb_riwayat r');
 		$this->db->where('r.kode_riwayat', $kode_riwayat);
 
 		return $this->db->get()->row_array();
 	}
 	public function getJawaban($kode_riwayat)
 	{
-		$getRiwayat = $this->db->get_where('tbl_riwayat', ['kode_riwayat' => $kode_riwayat])->row_array();
+		$getRiwayat = $this->db->get_where('tb_riwayat', ['kode_riwayat' => $kode_riwayat])->row_array();
 		$getJawaban = $getRiwayat['jawaban'];
 		if ($getJawaban != "") {
 			$getKodeGejala = explode(",", $getJawaban);
 			$dataGejala = [];
 			foreach ($getKodeGejala as $kodeGejala) {
-				$getGejala = $this->db->get_where('tbl_gejala', ['kode_gejala' => $kodeGejala])->row_array();
+				$getGejala = $this->db->get_where('tb_gejala', ['kode_gejala' => $kodeGejala])->row_array();
 				array_push($dataGejala, $getGejala);
 			}
 			return $dataGejala;
@@ -42,18 +40,18 @@ class Riwayat_model extends CI_Model
 		$kode_riwayat = $this->generateRandomString(3);
 		$data = [
 			'kode_riwayat' => $kode_riwayat,
-			'kode_pelanggan' => $this->input->post('kode_pelanggan'),
-			'kode_modem' => $this->input->post('kode_modem'),
+			'nama_pelanggan' => $this->session->userdata('username'),
+			'kode_jenis_perawatan' => $this->input->post('kode_jenis_perawatan'),
 			'jawaban' => $jawaban,
 			'created_at' => date('Y-m-d h:i:s'),
 		];
-		$this->db->insert('tbl_riwayat', $data);
+		$this->db->insert('tb_riwayat', $data);
 		return $kode_riwayat;
 	}
 	public function updateRiwayat($data)
 	{
 		$this->db->where('kode_riwayat', $data['kode_riwayat']);
-		$this->db->update('tbl_riwayat', $data);
+		$this->db->update('tb_riwayat', $data);
 	}
 	public function generateRandomString($length = 10)
 	{
@@ -69,12 +67,12 @@ class Riwayat_model extends CI_Model
 	{
 		// Logic Forward Chaining
 		// Riwayat
-		$getRiwayat = $this->db->get_where('tbl_riwayat', ['kode_riwayat' => $kode_riwayat])->row_array();
+		$getRiwayat = $this->db->get_where('tb_riwayat', ['kode_riwayat' => $kode_riwayat])->row_array();
 		if ($getRiwayat['jawaban'] != "") {
 			$getJawaban = explode(',', $getRiwayat['jawaban']);
 
 			// Rules
-			$getRules = $this->db->get_where('tbl_rules')->result_array();
+			$getRules = $this->db->get_where('tb_rules')->result_array();
 			for ($i = 0; $i < count($getRules); $i++) {
 				$isExists = 0;
 				$getGejala = explode(',', $getRules[$i]['kode_gejala_rules']);
@@ -89,8 +87,8 @@ class Riwayat_model extends CI_Model
 				if ($isExists == count($getGejala) && $isExists == count($getJawaban)) {
 					// get data solusi with relation
 					$this->db->select('*');
-					$this->db->from('tbl_rules r');
-					$this->db->join('tbl_solusi s', 'r.kode_solusi_rules = s.kode_solusi');
+					$this->db->from('tb_rules r');
+					$this->db->join('tb_solusi s', 'r.kode_solusi_rules = s.kode_solusi');
 					$this->db->where('r.kode_solusi_rules', $getRules[$i]['kode_solusi_rules']);
 
 					return $this->db->get()->row_array();

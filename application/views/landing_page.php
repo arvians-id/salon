@@ -113,10 +113,11 @@
 							<fieldset>
 								<h4>Data Perawatan</h4>
 								<div class="form-group">
-									<select name="kode_modem" class="form-control" id="verifikasiModem" required>
+									<select name="kode_jenis_perawatan" class="form-control" id="getGejalaBasedOnPerawatan" required>
 										<option value="" selected disabled>Pilih...</option>
-										<option value="SPA">SPA</option>
-										<option value="Rambut">Rambut</option>
+										<?php foreach ($jenis_perawatan as $jp) : ?>
+											<option value="<?= $jp['kode_jenis_perawatan'] ?>"><?= $jp['nama_jenis_perawatan'] ?></option>
+										<?php endforeach; ?>
 									</select>
 								</div>
 								<div class="f1-buttons">
@@ -128,6 +129,7 @@
 							<fieldset>
 								<h4>Keluhan Pelanggan</h4>
 								<p class="text-danger text-center">*Note: Jika tidak diisi akan otomatis terjawab <b>Tidak</b></p>
+								<div id="data-gejala"></div>
 								<div class="f1-buttons">
 									<button type="button" class="btn btn-warning btn-previous"><i class="fa fa-arrow-left"></i> Sebelumnya</button>
 									<button type="button" id="from-gejala" class="btn btn-primary btn-next">Selanjutnya <i class="fa fa-arrow-right"></i></button>
@@ -140,16 +142,10 @@
 									<div class="empty-state-icon">
 										<i class="fas fa-key"></i>
 									</div>
-									<h2 id="kode-pelanggan">Kode Pelanggan - Nama Pelanggan</h2>
 									<div class="profile-widget-description">
-										<div class="profile-widget-name" id="kode-modem">kode modem
-											<div class="text-muted d-inline font-weight-normal">
-												<div class="slash"></div> modem
-											</div>
-										</div>
-										<p class="font-weight-bold mt-2">Keluhan Anda</p>
+										<p class="font-weight-bold mt-2 text-center" style="color: black;">Keluhan Anda</p>
 										<table class="table table-responsive mt-3">
-											<thead id="penyesuaian-keluhan">
+											<thead id="penyesuaian-keluhan" style="color: black;">
 												<tr>
 													<th>Kode</th>
 													<td>Gejala/Keluhan</td>
@@ -230,6 +226,62 @@
 <script>
 	var today = new Date().toISOString().split('T')[0];
 	document.getElementsByName("tanggal")[0].setAttribute('min', today);
+	$(function() {
+		$('#getGejalaBasedOnPerawatan').on('change', function() {
+			let kode_jenis_perawatan = $('select[name="kode_jenis_perawatan"] option').filter(':selected').val()
+			$.ajax({
+				type: 'GET',
+				url: '<?= base_url() ?>/landing_page/getGejala/' + kode_jenis_perawatan,
+				dataType: "json",
+				success: function(data) {
+					let html = ''
+					let no = 0
+					$.each(data, function(key, value) {
+						html += `
+								<div class="form-group text-center">
+									<h4 class="text-center" style="margin-bottom: 0px; color: black;">${value['gejala']}</h4>
+									<div class="form-check form-check-inline d-inline">
+										<input class="form-check-input" type="radio" name="jawaban[${no}]" id="${value['kode_gejala']}1" value="${value['kode_gejala']}" data-fullgejala="${value['kode_gejala'] + "," + value['gejala']}">
+										<label class="form-check-label" style="color: black" for="${value['kode_gejala']}1">Ya</label>
+									</div>
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="jawaban[${no}]" id="${value['kode_gejala']}2" value="undefined" data-fullgejala="">
+										<label class="form-check-label" style="color: black" for="${value['kode_gejala']}2">Tidak</label>
+									</div>
+								</div>`;
+						no++
+					});
+
+					$('#data-gejala').html(html)
+				},
+			})
+		})
+
+
+		$('#from-gejala').on('click', function() {
+			let arr = [];
+			$(".form-check-input:checked").each(function() {
+				if ($(this).data('fullgejala') != "") {
+					arr.push($(this).data('fullgejala'));
+				}
+			});
+			let str = ""
+			for (let i = 0; i < arr.length; i++) {
+				let splitGejala = arr[i].split(",")
+				str += `<tr>
+							<th>${splitGejala[0]}</th>
+							<td>${splitGejala[1]}</td>
+						</tr>`
+			}
+			if (str == "") {
+				str = "Anda tidak mengeluhkan apapun disini! Silahkan kembali lagi. Setidaknya terdapat 1 keluhan yang anda keluhkan."
+				$('.btn-submit').hide()
+			} else {
+				$('.btn-submit').show()
+			}
+			$('#penyesuaian-keluhan').html(str)
+		})
+	})
 </script>
 
 </body>
