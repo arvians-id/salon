@@ -13,8 +13,13 @@ class Admin_dashboard extends CI_Controller
 	}
 	public function index()
 	{
+		$data = [
+			'judul' => 'Data Gejala',
+			'getRiwayat' => $this->db->get('tb_riwayat')->result_array(),
+		];
+
 		$this->load->view('admin_header');
-		$this->load->view('admin_dashboard');
+		$this->load->view('admin_dashboard', $data);
 	}
 	public function reservasi()
 	{

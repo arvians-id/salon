@@ -7,7 +7,7 @@
 		<div class="so-widget-sow-headline">
 			<div class="sow-headline">
 				<!-- <h1 class="whitetext">SELAMAT DATANG</h1> -->
-				<h1 class="whitetext">Vilary Salon dan Spa</h1>
+				<h1 class="whitetext">Vilary Salon & Spa</h1>
 			</div>
 		</div>
 		<br />
@@ -54,13 +54,13 @@
 	</div>
 </section>
 
-<!-- Lamun aya user nu login tampilken form lamun hnteu nya engges we eweh -->
+<!-- session forward chaining -->
 <?php if ($this->session->userdata('id')) : ?>
 	<!-- KELUHAN PELANGGAN=============================== -->
-	<section id="keluhan" class="whitetext" style="padding:160px 0;background-color:#fff;">
+	<section id="keluhan" class="whitetext" style="padding:160px 0;background-image: url(assets/img/spa/bg.jpg); background-position: center; background-repeat: no-repeat;background-size: cover;background-attachment:fixed;">
 		<section id="keluhan" class="services margintop60 container">
 			<div class="sow-headline">
-				<h1>KELUHAN PELANGGAN</h1>
+				<h1 class="toptitle" style="color:white;">TENTUKAN JENIS PERAWATAN YANG TEPAT UNTUK ANDA</h1>
 				<div class="decoration">
 					<div class="decoration-inside">
 					</div>
@@ -86,9 +86,8 @@
 				</div>
 			<?php endif; ?>
 			<div class="section-body">
-				<div class="card">
+				<div class="card" style="padding:100px 10px;background:#fff;">
 					<div class="card-header">
-						<h4>Form Keluhan/Pengaduan Pelanggan</h4>
 					</div>
 					<div class="card-body">
 						<form method="post" class="f1">
@@ -97,7 +96,7 @@
 									<div class="f1-progress-line" data-now-value="25" data-number-of-steps="4" style="width: 25%;"></div>
 								</div>
 								<div class="f1-step active">
-									<div class="f1-step-icon text-center"><i class="fas fa-wifi"></i></div>
+									<div class="f1-step-icon text-center"><i class="fas fa-spa"></i></div>
 									<p>Jenis Perawatan</p>
 								</div>
 								<div class="f1-step">
@@ -105,7 +104,7 @@
 									<p>Keluhan</p>
 								</div>
 								<div class="f1-step">
-									<div class="f1-step-icon text-center"><i class="fas fa-key"></i></div>
+									<div class="f1-step-icon text-center"><i class="fas fa-clipboard-list"></i></div>
 									<p>Penyesuaian</p>
 								</div>
 							</div>
@@ -121,8 +120,7 @@
 									</select>
 								</div>
 								<div class="f1-buttons">
-									<button type="button" class="btn btn-warning btn-previous"><i class="fa fa-arrow-left"></i> Sebelumnya</button>
-									<button type="button" class="btn btn-primary btn-next">Selanjutnya <i class="fa fa-arrow-right"></i></button>
+									<button type="button" class="cf7mls_next btn btn-primary btn-next" disabled>Selanjutnya <i class="fa fa-arrow-right"></i></button>
 								</div>
 							</fieldset>
 							<!-- step 3 -->
@@ -143,14 +141,9 @@
 										<i class="fas fa-key"></i>
 									</div>
 									<div class="profile-widget-description">
-										<p class="font-weight-bold mt-2 text-center" style="color: black;">Keluhan Anda</p>
-										<table class="table table-responsive mt-3">
-											<thead id="penyesuaian-keluhan" style="color: black;">
-												<tr>
-													<th>Kode</th>
-													<td>Gejala/Keluhan</td>
-												</tr>
-											</thead>
+										<h4 class="font-weight-bold mt-2 text-center" style="color: black;">Keluhan Anda</h4>
+										<table class="table table-bordered" style="text-align: left;">
+											<thead id="penyesuaian-keluhan" style="color: black;"></thead>
 										</table>
 									</div>
 									<div class="f1-buttons">
@@ -166,35 +159,7 @@
 		</section>
 	</section>
 	<!-- RESERVASI=============================== -->
-	<section id="blog" style="padding:160px 0;background-image: url(assets/img/spa/bg.jpg); background-position: center; background-repeat: no-repeat;background-size: cover;background-attachment:fixed;">
-		<div class="container">
-			<div class="textwidget">
-				<h1 class="toptitle">RESERVASI SEKARANG DAN<br /> TENTUKAN JADWALNYA <br /><br />
-					<!-- <i class="fa fa-star roundicon" style="color: gold"></i> -->
-					<i class="material-icons-outlined roundicon" style="color: #fff; background-color : #F67219;"><i class="fas fa-calendar-day"></i></i>
-				</h1>
-				<div class="contactstyle topform">
-
-					<form action="<?= base_url(); ?>Landing_page/index" method="post">
-						<div class="form">
-							<input type="text" name="name" placeholder="Atas Nama" required="required">
-							<div class="form-group">
-								<select class="form-control" id="perawatan" name="perawatan" required="required">
-									<option value=" Creambath">Creambath</option>
-									<option value="Rebonding">Rebonding</option>
-									<option value="Potong Rambut">Potong Rambut</option>
-								</select>
-							</div>
-							<input type="date" name="tanggal" placeholder="Tanggal *">
-							<input type="text" name="email" value="<?= $this->session->userdata('email'); ?>">
-							<input type="text" name="phone" placeholder="Nomor Telepon *">
-							<button type="submit" id="submit" name="submit" class="btn btn-secondary btn-block">Kirim</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</section>
+	<input type="date" name="tanggal" placeholder="Tanggal *" hidden>
 <?php endif; ?>
 
 <!-- CONTACT
@@ -269,7 +234,7 @@
 			for (let i = 0; i < arr.length; i++) {
 				let splitGejala = arr[i].split(",")
 				str += `<tr>
-							<th>${splitGejala[0]}</th>
+							
 							<td>${splitGejala[1]}</td>
 						</tr>`
 			}
@@ -282,6 +247,14 @@
 			$('#penyesuaian-keluhan').html(str)
 		})
 	})
+
+	jQuery($ => {
+		let $btn = $('.cf7mls_next');
+
+		$('select').on('change', e => {
+			$btn.prop('disabled', e.target.value == '');
+		});
+	});
 </script>
 
 </body>
