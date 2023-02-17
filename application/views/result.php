@@ -39,12 +39,12 @@
                             <?php if ($getSolusi != "Kode solusi tidak ditemukan") : ?>
                                 <h4>Adapun solusinya, sebagai berikut.</h4>
                                 <h5><?= $getSolusi['judul'] ?></h5>
-                                <p class="text-left"><?= $getSolusi['solusi'] ?></p>
+                                <p class="text-center"><?= $getSolusi['solusi'] ?></p>
                             <?php else : ?>
                                 <p>Maaf, solusi tidak ditemukan.</p>
                             <?php endif; ?>
-                            <a href="<?= base_url() ?>" class="btn btn-primary" style="width:200px;"><i class=""></i> Konsultasi ulang</a>
-                            <a href="#reservasi" class="btn" id="btn-reservasi">Reservasi</a>
+                            <a href="<?= base_url() ?>#keluhan" class="btn btn-primary" style="width:200px;"><i class=""></i> Konsultasi ulang</a>
+                            <a href="<?= base_url() ?>#reservasi" class="btn" id="btn-reservasi">Reservasi</a>
 
                         </div>
                     </div>
@@ -91,8 +91,7 @@
                     <i class="material-icons-outlined roundicon" style="color: #fff; background-color : #F67219;"><i class="fas fa-calendar-day"></i></i>
                 </h1>
                 <div class="contactstyle topform">
-
-                    <form action="<?= base_url(); ?>Landing_page" method="post">
+                    <form action="<?= base_url(); ?>Landing_page/reservasi" method="post">
                         <div class="form">
                             <input type="text" name="name" placeholder="Atas Nama" required="required">
                             <div class="form-group">
@@ -151,6 +150,10 @@
         <script src="<?= base_url(); ?>contact/topvalidate.js"></script>
         <script src="<?= base_url(); ?>assets/js/sweetalert2.all.min.js"></script>
         <script src="<?= base_url(); ?>assets/js/jssaya.js"></script>
+        <script>
+            var today = new Date().toISOString().split('T')[0];
+            document.getElementsByName("tanggal")[0].setAttribute('min', today);
+        </script>
 
         </body>
 

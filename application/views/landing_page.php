@@ -3,7 +3,6 @@
 <section id="tentang" class="whitetext" style="padding:160px 0;background-color:#F67219;">
 	<div class="container">
 		<div class="flash-data" data-flashdata="<?= $this->session->flashdata('message'); ?>"></div>
-
 		<div class="so-widget-sow-headline">
 			<div class="sow-headline">
 				<!-- <h1 class="whitetext">SELAMAT DATANG</h1> -->
@@ -159,7 +158,48 @@
 		</section>
 	</section>
 	<!-- RESERVASI=============================== -->
-	<input type="date" name="tanggal" placeholder="Tanggal *" hidden>
+	<section id="reservasi">
+		<div class="container">
+			<div class="sow-headline" style="margin: 50px;">
+				<h1>RESERVASI SEKARANG DAN<br /> TENTUKAN JADWALNYA <br /></h1>
+				<div class="decoration">
+					<div class="decoration-inside">
+					</div>
+				</div>
+			</div>
+			<div class="textwidget">
+				<div class="contactstyle topform">
+					<form action="<?= base_url(); ?>Landing_page/reservasi" method="post">
+						<div class="form">
+							<input type="text" name="name" placeholder="Atas Nama" required="required">
+							<div class="form-group">
+								<select class="form-control" id="perawatan" name="perawatan" required="required">
+									<option selected="true" disabled="true">Treatment</option>
+									<option value="Hair Spa">Hair Spa</option>
+									<option value="Hair Mask">Hair Mask</option>
+									<option value="Creambath">Creambath</option>
+									<option value="Hair Cut">Hair Cut</option>
+									<option value="Hair Coloring">Hair Coloring</option>
+									<option value="Facial">Facial</option>
+									<option value="Facial Galvanic">Facial Galvanic</option>
+									<option value="Facial Orange">Facial Orange</option>
+									<option value="Lulur">Lulur</option>
+									<option value="Creambath">Sauna</option>
+									<option value="Hair Cut">Mandi Rempah</option>
+									<option value="Hair Coloring">Mandi Susu</option>
+								</select>
+							</div>
+							<label>Tanggal Reservasi</label>
+							<input type="date" name="tanggal" placeholder="Tanggal *">
+							<input type="text" name="email" value="<?= $this->session->userdata('email'); ?>">
+							<input type="text" name="phone" placeholder="Nomor Telepon *">
+							<button type="submit" id="submit" name="submit" class="btn btn-secondary btn-block">Kirim</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
 <?php endif; ?>
 
 <!-- CONTACT

@@ -32,6 +32,23 @@ class Landing_page extends CI_Controller
 			redirect('landing_page/result');
 		}
 	}
+	public function reservasi()
+	{
+		$data['user'] = $this->db->get_where('login_pelanggan', ['email' => $this->session->userdata('email')])->row_array();
+		$this->form_validation->set_rules('name', 'Nama', 'required|trim');
+		$this->form_validation->set_rules('perawatan', 'Perawatan', 'required|trim');
+		$this->form_validation->set_rules('tanggal', 'Tanggal', 'required|trim');
+		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
+		$this->form_validation->set_rules('phone', 'Phone', 'required|trim|numeric');
+
+		if ($this->form_validation->run() == FALSE) {
+			redirect('landing_page');
+		} else {
+			$this->Model_landing_page->tambahReservasi();
+			$this->session->set_flashdata('message', 'ditambah');
+			redirect('landing_page');
+		}
+	}
 	public function result()
 	{
 		$kode_riwayat = $this->session->userdata('kode_riwayat');
