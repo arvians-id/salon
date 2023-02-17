@@ -35,7 +35,7 @@ class Gejala_model extends CI_Model
 	public function getFalseGejala($kode_riwayat)
 	{
 		$getRiwayat = $this->db->get_where('tb_riwayat', ['kode_riwayat' => $kode_riwayat])->row_array();
-		$getGejala = $this->db->get('tb_gejala')->result_array();
+		$getGejala = $this->db->get_where('tb_gejala', ['kode_jenis_perawatan' => $getRiwayat['kode_jenis_perawatan']])->result_array();
 		$arrJawaban = explode(',', $getRiwayat['jawaban']);
 
 		$falseGejala = [];
