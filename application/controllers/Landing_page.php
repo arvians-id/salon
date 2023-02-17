@@ -51,7 +51,9 @@ class Landing_page extends CI_Controller
 				$this->riwayat_m->updateRiwayat($dataUpdate);
 			}
 			// $this->session->unset_userdata('kode_riwayat');
+			$this->load->view('result_header', $data);
 			$this->load->view('result', $data);
+			$this->load->view('footer');
 		} else {
 			$this->session->set_flashdata('error', 'Sesi anda berakhir atau anda belum mengisi form pengaduan/keluhan');
 			redirect('home/keluhan');

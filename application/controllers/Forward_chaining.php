@@ -161,6 +161,7 @@ class Forward_Chaining extends CI_Controller
         $this->session->set_flashdata('success', 'Data berhasil dihapus.');
         redirect('forward_chaining/data_rules');
     }
+    // JENIS PERAWATAN
     public function data_jenis_perawatan()
     {
         $this->form_validation->set_rules('kode_jenis_perawatan', 'Kode Jenis Perawatan', 'required|is_unique[tb_jenis_perawatan.kode_jenis_perawatan]');

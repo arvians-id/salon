@@ -24,7 +24,7 @@
             <div class="list-group list-group-flush">
                 <a href="<?= base_url(); ?>admin_dashboard" class="list-group-item list-group-item-action bg-light <?= $this->uri->segment(2) == '' ? 'bg-dark text-white' : '' ?>">Dashboard</a>
                 <a href="<?= base_url(); ?>admin_dashboard/reservasi" class="list-group-item list-group-item-action bg-light <?= $this->uri->segment(2) == 'reservasi' ? 'bg-dark text-white' : '' ?>">Reservasi</a>
-                <a href="<?= base_url(); ?>admin_dashboard/list_akun" class="list-group-item list-group-item-action bg-light <?= $this->uri->segment(2) == 'list_akun' ? 'bg-dark text-white' : '' ?>">List Akun Pelangan</a>
+                <a href="<?= base_url(); ?>admin_dashboard/list_akun" class="list-group-item list-group-item-action bg-light <?= $this->uri->segment(2) == 'list_akun' ? 'bg-dark text-white' : '' ?>">List Akun Pelanggan</a>
                 <a href="<?= base_url(); ?>forward_chaining/data_gejala" class="list-group-item list-group-item-action bg-light <?= $this->uri->segment(1) == 'forward_chaining' ? 'bg-dark text-white' : '' ?>">Forward Chaining</a>
             </div>
         </div>
@@ -40,7 +40,7 @@
                     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <?= $this->session->userdata('name') ?>
+                                <?= $this->session->userdata('username') ?>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="<?= base_url(); ?>auth/logout">Logout</a>

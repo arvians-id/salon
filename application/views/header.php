@@ -241,17 +241,12 @@
                 <?php else : ?>
                   <li><a href="#keluhan" data-toggle="modal" data-target="#login">Diagnosa</a></li>
                 <?php endif; ?>
-                <?php if ($this->session->userdata('id')) : ?>
-                  <li><a href="#blog">Reservasi</a></li>
-                <?php else : ?>
-                  <li><a href="#blog" data-toggle="modal" data-target="#login">Reservasi</a></li>
-                <?php endif; ?>
                 <li><a href="#contact">Kontak</a></li>
                 <?php if ($this->session->userdata('id')) : ?>
                   <li><a href="<?= base_url('auth_pelanggan/logout/') ?>" style="color:#7D7F7F; display: inline;"><?= $this->session->userdata('username') ?></a> | <a href="<?= base_url('auth_pelanggan/logout/') ?>" style="display: inline;" value="<?= $this->session->userdata('email'); ?>" style="color:#7D7F7F;">LOGOUT</a></li>
                 <?php else : ?>
-                  <li><a href="#" data-toggle="modal" data-target="#login">Sign In</a></li>
-                  <li><a href="#" data-toggle="modal" data-target="#registerModal">Sign Up</a></li>
+                  <li><a href="#" data-toggle="modal" data-target="#login">Masuk</a></li>
+                  <li><a href="#" data-toggle="modal" data-target="#registerModal">Daftar Akun</a></li>
                 <?php endif; ?>
               </ul>
             </div>
@@ -266,7 +261,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Sign In</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Masuk</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -284,7 +279,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary">Login</button>
+          <button type="submit" class="btn btn-primary">Masuk</button>
         </div>
       </div>
     </div>
@@ -298,7 +293,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Sign Up</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Daftar Akun</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -309,7 +304,7 @@
 
           <form action="<?= base_url('auth_pelanggan/registration'); ?>" method="post">
             <div class="form-group">
-              <label for="name">Name</label>
+              <label for="name">Nama</label>
               <input type="text" class="form-control" id="name" name="name" placeholder="Enter your name">
             </div>
 
@@ -319,7 +314,7 @@
             </div>
 
             <div class="form-group">
-              <label for="email">Email address</label>
+              <label for="email">Email</label>
               <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
             </div>
 
@@ -329,14 +324,14 @@
             </div>
 
             <div class="form-group">
-              <label for="password2">Repeat Password</label>
+              <label for="password2">Ulangi Password</label>
               <input type="password" class="form-control" id="password2" name="password2" placeholder="Repeat Password">
             </div>
 
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-          <button type="submit" class="btn btn-primary">Register Account !</button>
+          <button type="submit" class="btn btn-primary">Daftar Akun</button>
         </div>
       </div>
     </div>
